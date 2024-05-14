@@ -1,0 +1,102 @@
+---
+title: "ESA4_Aaliyah_Roderer"
+author: "Aaliyah Roderer"
+date: "2024-05-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r package}
+#Package installieren
+install.packages("ggplot2", repos = "https://cran.rstudio.com") 
+
+#Package laden
+library(ggplot2)
+```
+
+## Irisdaten importieren
+
+```{r Daten}
+data("iris")
+```
+
+
+## Scatter Plot Part 1
+
+make a scatter plot with x-axis: Sepal.Length and y-axis: Sepal.Width, and the species should be shown in different colors
+
+```{r scatterplot}
+
+library(ggplot2)
+
+data("iris")
+
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + ggtitle("Scatter Plot") +
+  geom_point() + labs(x = "Sepal Length", y = "Sepal Width", color = "Species") + theme_minimal()
+
+```
+
+# Scatter Plot Part 1
+
+Add regression line in
+
+```{r regression line}
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + geom_point() + geom_smooth(method = "lm", se = FALSE, color = "black") + ggtitle("Scatter Plot with Regression Line") + labs(x = "Sepal Length", y = "Sepal Width") + theme_minimal()
+
+```
+
+# Pearson correlation
+
+calculate the Pearson correlation for this plot
+
+```{r correlation}
+
+correlation <- cor(iris$Sepal.Length, iris$Sepal.Width)
+correlation
+
+```
+
+# Boxplot
+
+make the boxplot for Petal.Width with 3 species separately in the x-axis in different colors
+
+```{r boxplot}
+
+ggplot(data = iris, aes(x = Species, y = Petal.Width, color = Species)) + geom_boxplot() + ggtitle("Boxplot of Petal Width by Species") + labs(x = "Species", y = "Petal Width") + theme_minimal() + theme(legend.position="none")
+
+```
+
+## Histogram
+
+make the histogram for Petal.Width with 3 species separately in x-axis in different colors
+
+```{r histogram}
+
+# ggplot(data = iris, aes(x = Petal.Width, fill = Species, color = Species)) + ggtitle("Histogram of Petal Width by Species") + geom_histogram(alpha = 0.5, position = "identity", bins = 50) + labs(x = "Petal Width", y = "Frequency")
+
+ggplot(iris, aes(x = Petal.Width, fill = Species)) + geom_histogram(binwidth = 0.2, position = "identity", alpha = 0.5) + facet_wrap(~Species) + ggtitle("Histogram of Petal Width by Species") + labs(x = "Petal Width", y = "Frequency") 
+
+```
+
+## T-test
+
+run the t-test of Petal.Width between setosa and virginica, and give the conclusion if the width is a statistically significant difference between 2 species
+
+```{r t-test}
+
+res <- t.test(Petal.Width ~ Species, data = iris, subset = (Species == "setosa" | Species == "virginica"))
+print(res)
+
+if (res$p.value < 0.05) {
+  print("The difference in Petal Width between setosa and virginica species is statistically significant.")
+} else {
+  print("There is no statistically significant difference in Petal Width between setosa and virginica species.")
+}
+
+```    
