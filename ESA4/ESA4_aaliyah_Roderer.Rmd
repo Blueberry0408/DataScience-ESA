@@ -41,7 +41,7 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + g
 
 ```
 
-# Scatter Plot Part 1
+# Scatter Plot Part 2
 
 Add regression line in
 
