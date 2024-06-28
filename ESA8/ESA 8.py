@@ -360,9 +360,6 @@ plt.show()
 # 
 # Ausreißer: Es sollte eine Methode impementiert werden um mit Ausreißern in den Daten besser umgehen zu können
 # 
-# Behandlung von Ausreißern:
-# Implementieren von robusten Methoden zur Identifizierung und Behandlung von Ausreißern, da Linear Regression empfindlich auf ungewöhnliche Datenpunkte reagieren kann.
-# 
 # Feature Bewertung: Zuletzt könnten die Feature untersucht werden um irrelevante oder weniger wichtige Features zu identifizieren und zu eliminieren.
 
 # In[ ]:
